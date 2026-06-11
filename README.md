@@ -6,46 +6,77 @@ Para este projeto, além de migrarmos do JSON para o JSON Server, vamos permitir
 
 ## Informações Gerais
 
-- Nome:
-- Matrícula:
-- Proposta de projeto escolhida:
-- Breve descrição sobre seu projeto:
+- Nome: Felipe de Carvalho Andrade
+- Matrícula: 902883
+- Proposta de projeto escolhida: **Temas e Conteúdos Associados**  
+- Breve descrição sobre seu projeto: Este projeto é uma aplicação web de catálogo de livros, organizada por categorias literárias como Literatura Brasileira, Ficção Científica, Mistério e Suspense, entre outras. Cada livro possui informações  detalhadas, incluindo título, autor, sinopse, descrição, editora, ano de publicação, número de páginas e imagem de capa. Além disso, cada livro possui um botão que leva para o site da Amazon para realizar a compra do livro
 
-**Prints do trabalho**
+## Prints do Trabalho
 
-<< DADOS DO DB.JSON (ENTIDADE PRINCIPAL E SECUNDÁRIA) >>
+### Interface Completa (Home-Page)
+<p align="center">
+  <img src="public/images/home-page.png" alt="Interface Completa AtlasLivros" width="600"/>
+</p>
+
+<p align="center">
+  <em>Figura 1: Visão geral da página principal apresentando o banner rotativo de destaques, barra de pesquisa, filtros por categorias e a grade de livros disponíveis no catálogo.</em>
+</p>
+
+---
+
+### Detalhes do Produto
+<p align="center">
+  <img src="public/images/tela-detalhes.png" alt="Detalhes do Livro" width="600"/>
+</p>
+
+<p align="center">
+  <em>Figura 2: Visualização da página interna de uma obra exibindo a capa, resumo rápido, link para compra, ficha técnica estruturada (Editora, Ano, Páginas, Origem), a sinopse completa e a seção de recomendações "Você Também Pode Gostar".</em>
+</p>
+
+---
+
+## Dados em JSON
+
+A aplicação é alimentada dinamicamente por uma base de dados simulada utilizando o JSON Server, configurada no arquivo `db.json`. A estrutura conta com duas coleções principais:
+
+* **`livros`**: Coleção principal que armazena todos os produtos do catálogo. Cada objeto contém dados estruturais detalhados da obra (título, autor, preços, descrições longa e curta), flags booleanas (`destaque`) e metadados fundamentais (páginas, editora, ano e arrays de tags).
+* **`categorias`**: Coleção de apoio que mantém a lista das categorias literárias disponíveis (ex: Literatura Brasileira, Fantasia, Ficção Científica) para manter a padronização e estruturação dos dados.
+
+Abaixo está apresentado um modelo de exemplo contendo um item de cada coleção da nossa base de dados:
 
 ```json
 {
-  "cidades": [
+  "livros": [
     {
       "id": 1,
-      "nome": "Paris",
-      "descricao": "Capital francesa famosa por arte, gastronomia e arquitetura icônica.",
-      "conteudo": "Paris oferece museus de classe mundial, boulevards arborizados e cafés charmosos. Ideal para quem busca história, cultura e experiências gastronômicas.",
-      "pais": "França",
+      "titulo": "Dom Casmurro",
+      "autor": "Machado de Assis",
+      "categoria": "Literatura Brasileira",
+      "origem": "Nacional",
+      "descricaoCurta": "Um dos maiores clássicos da literatura brasileira, conhecido por sua narrativa introspectiva.",
+      "descricaoCompleta": "Bentinho reconstrói sua vida e seu relacionamento com Capitu, sua grande paixão. Entre lembranças fragmentadas e interpretações subjetivas, surge a dúvida eterna sobre a possível traição de Capitu.",
+      "imagem": "https://images.tcdn.com.br/img/img_prod/1271663/dom_casmurro_edicao_de_luxo_almofadada_89_1_038fb70c564eb50f71ea49f6027e827a.jpg",
+      "preco": 42.50,
+      "tags": [
+        "Romance",
+        "Clássico",
+        "Realismo"
+      ],
       "destaque": true,
-      "data": "2025-03-30",
-      "imagemPrincipal": "img/paris.jpg"
+      "paginas": 256,
+      "editora": "Principis",
+      "anoPublicacao": 2019,
+      "anoEscrita": 1899
     }
   ],
-  "atracoes": [
+  "categorias": [
     {
       "id": 1,
-      "cidadeId": 1,
-      "nome": "Torre Eiffel",
-      "descricao": "Monumento símbolo de Paris com mirantes panorâmicos.",
-      "imagem": "img/atracoes/torre_eiffel.jpg"
+      "nome": "Literatura Brasileira"
     }
   ]
 }
 ```
-
-<< COLOQUE A IMAGEM DA HOME AQUI >>
-
-<< COLOQUE A IMAGEM DA TELA DE DETALHES AQUI >>
-
-
 
 ## **Orientações Gerais**
 

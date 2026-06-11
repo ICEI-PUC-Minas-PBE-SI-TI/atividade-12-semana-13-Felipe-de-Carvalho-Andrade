@@ -10,7 +10,10 @@ const STUDENT_INFO = {
   curso: "Sistemas de Informação",
   turma: "2026.1",
   redes: [
-    { nome: "LinkedIn", url: "https://www.linkedin.com/in/felipe-de-carvalho-andrade-it" },
+    {
+      nome: "LinkedIn",
+      url: "https://www.linkedin.com/in/felipe-de-carvalho-andrade-it",
+    },
     { nome: "GitHub", url: "https://github.com/Felipe-de-Carvalho-Andrade" },
     { nome: "Instagram", url: "#" },
   ],
@@ -41,15 +44,20 @@ async function renderRecommendations(currentBookId) {
     const response = await fetch(API_URL);
     if (!response.ok) return;
     const allBooks = await response.json();
-    
-    const recommendations = allBooks.filter(b => b.id !== parseInt(currentBookId));
-    
+
+    const recommendations = allBooks.filter(
+      (b) => b.id !== parseInt(currentBookId),
+    );
+
     if (recommendations.length === 0) return;
 
-    const cardsHtml = recommendations.map(b => {
-      const amazonLink = b.linkAmazon || `https://www.amazon.com.br/s?k=${encodeURIComponent(b.titulo + ' ' + b.autor)}`;
-      
-      return `
+    const cardsHtml = recommendations
+      .map((b) => {
+        const amazonLink =
+          b.linkAmazon ||
+          `https://www.amazon.com.br/s?k=${encodeURIComponent(b.titulo + " " + b.autor)}`;
+
+        return `
         <article class="related-book-card">
           <a href="details.html?id=${b.id}" class="related-book-card__media">
             <img src="${b.imagem}" alt="Capa de ${b.titulo}" loading="lazy" onerror="this.src='https://placehold.co/300x400?text=Capa'"/>
@@ -67,7 +75,8 @@ async function renderRecommendations(currentBookId) {
           </div>
         </article>
       `;
-    }).join("");
+      })
+      .join("");
 
     elements.detail.innerHTML += `
       <section class="mt-5 pt-5 border-top" style="border-color: var(--border) !important;">
@@ -90,7 +99,7 @@ async function renderRecommendations(currentBookId) {
 // 6.A.1 - Captura parâmetros da URL, valida dados e inicializa a tela
 async function initDetails() {
   loadTheme();
-  renderHeader(true); 
+  renderHeader(true);
   renderFooter();
 
   if (!elements.detail) return;
@@ -127,8 +136,12 @@ async function initDetails() {
   // Atualização dinâmica do título da aba
   document.title = `${book.titulo} – ${book.autor} | Atlas Livros`;
 
-  const tagsHtml = book.tags.map(tag => `<span class="book-origin-badge">${tag}</span>`).join(" ");
-  const mainAmazonLink = book.linkAmazon || `https://www.amazon.com.br/s?k=${encodeURIComponent(book.titulo + ' ' + b.autor)}`;
+  const tagsHtml = book.tags
+    .map((tag) => `<span class="book-origin-badge">${tag}</span>`)
+    .join(" ");
+  const mainAmazonLink =
+    book.linkAmazon ||
+    `https://www.amazon.com.br/s?k=${encodeURIComponent(book.titulo + " " + book.autor)}`;
 
   // 6.A.3 - Renderização Completa e detalhada do Item obtido
   elements.detail.innerHTML = `
@@ -152,7 +165,7 @@ async function initDetails() {
           <h2 class="detail-summary-title">Resumo Rápido</h2>
           <p class="detail-summary-text">${book.descricaoCurta}</p>
           <div class="detail-quick-info mb-3">
-             <span style="color: var(--primary); font-size: 1.4rem;">R$ ${Number(book.preco).toFixed(2).replace('.', ',')}</span>
+             <span style="color: var(--primary); font-size: 1.4rem;">R$ ${Number(book.preco).toFixed(2).replace(".", ",")}</span>
           </div>
           <a class="btn btn-primary btn-lg w-100" href="${mainAmazonLink}" target="_blank" rel="noopener noreferrer">Comprar agora</a>
         </div>
@@ -196,7 +209,11 @@ function saveTheme(value) {
 
 function loadTheme() {
   const storedTheme = window.localStorage.getItem("biblioteca-theme");
-  const defaultTheme = storedTheme || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  const defaultTheme =
+    storedTheme ||
+    (window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light");
   saveTheme(defaultTheme);
 }
 
@@ -225,10 +242,17 @@ function renderHeader(isDetail = false) {
 function renderFooter() {
   if (!elements.footer) return;
 
-  const linkedinUrl = STUDENT_INFO.redes.find((r) => r.nome.toLowerCase() === "linkedin")?.url || "#";
-  const githubUrl = STUDENT_INFO.redes.find((r) => r.nome.toLowerCase() === "github")?.url || "#";
-  const instagramUrl = STUDENT_INFO.redes.find((r) => r.nome.toLowerCase() === "instagram")?.url || "#";
-  const fotoPerfilUrl = "https://avatars.githubusercontent.com/u/108103633?s=400&u=432c7d9ea79269cd68538f69b0e65f10f12b0849&v=4";
+  const linkedinUrl =
+    STUDENT_INFO.redes.find((r) => r.nome.toLowerCase() === "linkedin")?.url ||
+    "#";
+  const githubUrl =
+    STUDENT_INFO.redes.find((r) => r.nome.toLowerCase() === "github")?.url ||
+    "#";
+  const instagramUrl =
+    STUDENT_INFO.redes.find((r) => r.nome.toLowerCase() === "instagram")?.url ||
+    "#";
+  const fotoPerfilUrl =
+    "https://avatars.githubusercontent.com/u/108103633?s=400&u=432c7d9ea79269cd68538f69b0e65f10f12b0849&v=4";
 
   elements.footer.innerHTML = `
     <footer class="footer-wrapper py-5">
